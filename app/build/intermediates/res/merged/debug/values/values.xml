@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="read_text_test1">
+        <item>テスト１</item>
+        <item>テスト１</item>
+        <item>192.168.0.117</item>
+        <item>Windows10</item>
+        <item>2013</item>
+    </string-array>
+    <string-array name="read_text_title">
+        <item>名称</item>
+        <item>機種</item>
+        <item>IPアドレス</item>
+        <item>OS</item>
+        <item>Officeバージョン</item>
+    </string-array>
     <color name="black">#000000</color>
     <color name="gray">#575757</color>
     <color name="light_gray">#D3D3D3</color>

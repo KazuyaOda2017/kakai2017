@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,12 +27,14 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.vuforia.CameraDevice;
@@ -55,6 +58,8 @@ import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenu;
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuGroup;
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuInterface;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -88,6 +93,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
     LoadingDialogHandler loadingDialogHandler = new LoadingDialogHandler(this);
 
     private View _viewCard;
+    private String readId;
     private TextView _textType;
     private TextView _textValue;
     private ImageView _instanceImageView;
@@ -126,7 +132,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
         LayoutInflater inflater = getLayoutInflater();
         _viewCard = inflater.inflate(R.layout.card, null);
         _viewCard.setVisibility(View.INVISIBLE);
-        LinearLayout cardLayout = (LinearLayout) _viewCard.findViewById(R.id.card_layout);
+        LinearLayout cardLayout = (LinearLayout) _viewCard.findViewById(R.id.TableLayout1);
 
         cardLayout.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -139,9 +145,9 @@ public class VuMark extends Activity implements SampleApplicationControl,
         });
         addContentView(_viewCard, layoutParamsControl);
 
-        _textType = (TextView) _viewCard.findViewById(R.id.text_type);
-        _textValue = (TextView) _viewCard.findViewById(R.id.text_value);
-        _instanceImageView = (ImageView) _viewCard.findViewById(R.id.instance_image);
+        //_textType = (TextView) _viewCard.findViewById(R.id.text_type);
+        //_textValue = (TextView) _viewCard.findViewById(R.id.text_value);
+        //_instanceImageView = (ImageView) _viewCard.findViewById(R.id.instance_image);
     }
     
     // Process Single Tap event to trigger autofocus
@@ -295,8 +301,8 @@ public class VuMark extends Activity implements SampleApplicationControl,
         mGlView.setRenderer(mRenderer);
         
     }
-    
-    
+
+
     private void startLoadingAnimation()
     {
         mUILayout = (RelativeLayout) View.inflate(this, R.layout.camera_overlay_reticle,
@@ -319,29 +325,67 @@ public class VuMark extends Activity implements SampleApplicationControl,
         
     }
 
+    /**
+     * 読み込み情報を設定
+     * @param type
+     * @param value
+     * @param bitmap
+     */
     void showCard(final String type, final String value, final Bitmap bitmap) {
         final Context context = this;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // if scard is already visible with same VuMark, do nothing
-                if ((_viewCard.getVisibility() == View.VISIBLE) && (_textValue.getText().equals(value))) {
+                if ((_viewCard.getVisibility() == View.VISIBLE) && (readId.equals(value))) {
                     return;
                 }
+                readId = value;
                 Animation bottomUp = AnimationUtils.loadAnimation(context,
                         R.anim.bottom_up);
 
-                _textType.setText(type);
-                _textValue.setText(value);
-                if (bitmap != null) {
-                    _instanceImageView.setImageBitmap(bitmap);
-                }
+                Resources res = getResources();
+
+                // 読み取り結果取得
+                int valueId = res.getIdentifier("read_text_" + value, "array", getPackageName());
+                List<String> valueList = Arrays.asList(res.getStringArray(valueId));
+
+                // タイトル取得
+                int titleId = res.getIdentifier("read_text_title", "array", getPackageName());
+                List<String> titleList = Arrays.asList(res.getStringArray(titleId));
+
+                // テーブル設定
+                setTableRow(titleList, valueList);
+
                 _viewCard.bringToFront();
                 _viewCard.setVisibility(View.VISIBLE);
                 _viewCard.startAnimation(bottomUp);
                 // mUILayout.invalidate();
             }
         });
+    }
+
+    /**
+     * 読み取り結果を設定
+     * @param titleList　タイトルリスト
+     * @param valueList　読み取り結果理リスト
+     */
+    public void setTableRow(List<String> titleList, List<String> valueList){
+        ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
+        for (int i = 0 ; i < valueList.size() ; i++) {
+            getLayoutInflater().inflate(R.layout.tablerow_layout, vg);
+            TableRow tr = (TableRow) vg.getChildAt(i);
+            ((TextView) (tr.getChildAt(0))).setText(titleList.get(i));
+            ((TextView) (tr.getChildAt(1))).setText(valueList.get(i));
+        }
+    }
+
+    /**
+     * TableLayoutを初期化
+     */
+    public void clearTableRow() {
+        ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
+        vg.removeAllViews();
     }
 
     void hideCard() {
@@ -353,8 +397,10 @@ public class VuMark extends Activity implements SampleApplicationControl,
             if (_viewCard.getVisibility() != View.VISIBLE) {
                 return;
             }
-            _textType.setText("");
-            _textValue.setText("");
+
+            //_textType.setText("");
+            //_textValue.setText("");
+            clearTableRow();
             Animation bottomDown = AnimationUtils.loadAnimation(context,
                     R.anim.bottom_down);
 
@@ -382,7 +428,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
             return false;
         
         if (!mCurrentDataset.load(
-                "testVumark.xml",
+                "testT.xml",
             STORAGE_TYPE.STORAGE_APPRESOURCE))
             return false;
         
@@ -589,11 +635,14 @@ public class VuMark extends Activity implements SampleApplicationControl,
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+
         // Process the Gestures
-        if (mSampleAppMenu != null && mSampleAppMenu.processEvent(event))
+        /*if (mSampleAppMenu != null && mSampleAppMenu.processEvent(event))
             return true;
         
         return mGestureDetector.onTouchEvent(event);
+        */
+        return false;
     }
     
     

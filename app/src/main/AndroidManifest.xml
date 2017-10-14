@@ -103,6 +103,13 @@
             android:screenOrientation="portrait"
             >
         </activity>
+
+        <activity
+            android:name=".ui.ActivityList.ActivityMenu"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
         
          <activity
             android:name=".ui.ActivityList.AboutScreen"

@@ -67,5 +67,21 @@
     <string name="menu_button_green">Green</string>
         
     <string name="splash_screen_description">Vuforia Splash</string>
+
+    <string-array name="read_text_test1">
+        <item>テスト１</item>
+        <item>テスト１</item>
+        <item>192.168.0.117</item>
+        <item>Windows10</item>
+        <item>2013</item>
+    </string-array>
+
+    <string-array name="read_text_title">
+        <item>名称</item>
+        <item>機種</item>
+        <item>IPアドレス</item>
+        <item>OS</item>
+        <item>Officeバージョン</item>
+    </string-array>
     
 </resources>

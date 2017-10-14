@@ -1,18 +1,10 @@
 [
     {
-        "merged": "C:\\nakahashi\\VuforiaSamples-6-2-10\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_up.xml",
-        "source": "C:\\nakahashi\\VuforiaSamples-6-2-10\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_up.xml"
+        "merged": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_down.xml",
+        "source": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_down.xml"
     },
     {
-        "merged": "C:\\nakahashi\\VuforiaSamples-6-2-10\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_down.xml",
-        "source": "C:\\nakahashi\\VuforiaSamples-6-2-10\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_down.xml"
-    },
-    {
-        "merged": "D:\\kazuya\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_down.xml",
-        "source": "D:\\kazuya\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_down.xml"
-    },
-    {
-        "merged": "D:\\kazuya\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_up.xml",
-        "source": "D:\\kazuya\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_up.xml"
+        "merged": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\anim\\bottom_up.xml",
+        "source": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\anim\\bottom_up.xml"
     }
 ]
