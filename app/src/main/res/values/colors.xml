@@ -10,5 +10,13 @@
     
     <color name="overlay_bottom_bar_separators">#333333</color>
     <color name="overlay_bottom_bar_background">#1E1E1E</color>
-    
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorSkyblue">#87ceeb</color>
+    <color name="colorOrengi">#ff8c00</color>
+    <color name="colorAlphaGray">#10000000</color>
+    <color name="colorAlphaOrengi">#80FF8C00</color>
 </resources>
