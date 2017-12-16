@@ -1,5 +1,48 @@
 [
     {
+        "outputFile": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xxhdpi-v4\\values-xxhdpi-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 47,
+                    "endOffset": 98
+                },
+                "from": {
+                    "file": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\src\\main\\res\\values-xxhdpi\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 47,
+                        "endOffset": 102
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 103,
+                    "endColumn": 48,
+                    "endOffset": 147
+                },
+                "from": {
+                    "file": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\src\\main\\res\\values-xxhdpi\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 108,
+                        "endColumn": 48,
+                        "endOffset": 152
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xxhdpi-v4\\values-xxhdpi-v4.xml",
         "map": [
             {

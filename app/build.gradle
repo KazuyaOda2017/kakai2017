@@ -42,4 +42,5 @@ android {
 
 dependencies {
     compile files('Vuforia.jar')
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.4'
 }

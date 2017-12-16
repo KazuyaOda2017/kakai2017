@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VuforiaSamples-6-2-10.iml" filepath="$PROJECT_DIR$/VuforiaSamples-6-2-10.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kakai2017.iml" filepath="$PROJECT_DIR$/kakai2017.iml" />
     </modules>
   </component>
 </project>

@@ -4,7 +4,19 @@
         "source": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\drawable-xhdpi\\icon.png"
     },
     {
+        "merged": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\logo.png",
+        "source": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\src\\main\\res\\drawable-xhdpi\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\icon_.png",
+        "source": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\src\\main\\res\\drawable-xhdpi\\icon_.png"
+    },
+    {
         "merged": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\logo.png",
         "source": "C:\\Users\\M.Nakano\\AndroidStudioProjects\\VuforiaSamples-6-2-10\\app\\src\\main\\res\\drawable-xhdpi\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\icon.png",
+        "source": "C:\\Users\\K.Oda\\AndroidStudioProjects\\kakai2017\\app\\src\\main\\res\\drawable-xhdpi\\icon.png"
     }
 ]
