@@ -1,5 +1,7 @@
 package com.vuforia.samples.VuforiaSamples.ui.Common;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -18,15 +20,20 @@ import java.net.URL;
  * Created by K.Oda on 2017/12/16.
  */
 
-public class HttpRequest extends AsyncTask<Uri.Builder, Void, String> {
+public class HttpRequest extends AsyncTask<Uri.Builder, Integer, String> implements HttpInterFace{
 
     private String url;
     private String json;
     private CallBackTask callBackTask;
+    private Activity activity;
+    public  ProgressType progressType = ProgressType.DIALOG;
+    private ProgressDialog progressDialog;
 
-    public HttpRequest(String url,String json){
+
+    public HttpRequest(String url,String json, Activity activity){
         this.url = url;
         this.json = json;
+        this.activity = activity;
     }
 
     public String excutePost(String url, String json) {
@@ -83,7 +90,7 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Void, String> {
             return res;
         } catch (RuntimeException e) {
             e.printStackTrace();
-            return "1";
+            return res;
         } finally {
             ps.close();
         }
@@ -108,13 +115,40 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Void, String> {
     @Override
     protected String doInBackground(Uri.Builder... builders) {
 
-        String res = this.excutePost(this.url,this.json);
-        return res;
+
+        Thread thread = new Thread();
+        try {
+            thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //String res = this.excutePost(this.url,this.json);
+        return null;
     }
+
+    @Override
+    protected void onPreExecute(){
+
+        try {
+            //ダイアログを表示する
+            progressDialog = new ProgressDialog(this.activity);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("接続中");
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     protected void onPostExecute(String result){
         super.onPostExecute(result);
+        //プログレスダイアログを閉じる
+        progressDialog.dismiss();
         callBackTask.CallBack(result);
     }
 
@@ -122,9 +156,7 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Void, String> {
         callBackTask = _cbj;
     }
 
-    public static class CallBackTask{
-        public void CallBack(String result){
-
-        }
+    public static abstract class CallBackTask{
+        abstract public void CallBack(String result);
     }
 }

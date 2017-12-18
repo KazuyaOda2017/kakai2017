@@ -1,6 +1,7 @@
 package com.vuforia.samples.VuforiaSamples.ui.ActivityList;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,9 +16,12 @@ import com.vuforia.samples.VuforiaSamples.ui.Common.JsonUserInfo;
  * Created by K.Oda on 2017/12/16.
  */
 
-public class ActivityUserRegister extends Activity {
+public class ActivityUserRegister extends Activity implements Runnable{
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private ProgressDialog progressDialog;
+    private Thread thread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +36,20 @@ public class ActivityUserRegister extends Activity {
         try {
             String json = objectMapper.writeValueAsString(J_user);
 
-            String url = "http://192.168.0.150:8080/kakai2017-restapi/insert/user";
+            //String url = "http://192.168.0.150:8080/kakai2017-restapi/insert/user";
             //http_res = HttpRequest.excutePost(url,json);
             Uri.Builder builder = new Uri.Builder();
-            HttpRequest httpRequest = new HttpRequest(url,json);
+            HttpRequest httpRequest = new HttpRequest(HttpRequest.INSERT_USERINFO,json,this);
+
             httpRequest.execute(builder);
 
-            httpRequest.setOnCallBack(new HttpRequest.CallBackTask(){
-                @Override
-                public void CallBack(String result){
-                    super.CallBack(result);
 
-                    System.out.print("result = " + result);
+
+            httpRequest.setOnCallBack(new HttpRequest.CallBackTask(){
+
+                @Override
+                public void CallBack(String result) {
+
                 }
             });
 
@@ -60,4 +66,8 @@ public class ActivityUserRegister extends Activity {
 
     }
 
+    @Override
+    public void run() {
+
+    }
 }
