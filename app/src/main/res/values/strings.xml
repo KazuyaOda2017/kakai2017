@@ -83,5 +83,9 @@
         <item>OS</item>
         <item>Officeバージョン</item>
     </string-array>
+
+    <!--Step2-->
+    <string name="user_regist">ユーザー登録</string>
+    <string name="userName">ユーザー名</string>
     
 </resources>

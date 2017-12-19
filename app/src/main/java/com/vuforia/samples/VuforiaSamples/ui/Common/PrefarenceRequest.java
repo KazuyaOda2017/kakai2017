@@ -56,7 +56,7 @@ public class PrefarenceRequest extends Activity{
             editer.putString(PREKEY_USERNAME,UserInfo.getInstance().getUserName());
             editer.putString(PREKEY_USERID,UserInfo.getInstance().getUserId());
             editer.putInt(PREKEY_SEX,UserInfo.getInstance().getSex());
-
+            editer.commit();
             return true;
         }
         catch (Exception e){

@@ -148,8 +148,13 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Integer, String> impleme
     protected void onPostExecute(String result){
         super.onPostExecute(result);
         //プログレスダイアログを閉じる
-        progressDialog.dismiss();
-        callBackTask.CallBack(result);
+        try{
+            progressDialog.dismiss();
+            callBackTask.CallBack(result);
+        }catch (Exception e){
+
+        }
+
     }
 
     public void setOnCallBack(CallBackTask _cbj){

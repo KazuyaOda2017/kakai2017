@@ -19,4 +19,11 @@
     <color name="colorOrengi">#ff8c00</color>
     <color name="colorAlphaGray">#10000000</color>
     <color name="colorAlphaOrengi">#80FF8C00</color>
+
+    <!--Step2-->
+    <color name="colorComent">#99ccff</color>
+    <color name="colorDitail">#ffcc66</color>
+    <color name="colorTabBack">#339900</color>
+    <color name="White">#ffffff</color>
+    <color name="Bule">#0000FF</color>
 </resources>

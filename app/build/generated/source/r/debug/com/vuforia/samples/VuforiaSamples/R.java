@@ -17,22 +17,27 @@ public final class R {
     public static final int read_text_title=0x7f020001;
   }
   public static final class color {
-    public static final int black=0x7f030000;
-    public static final int colorAccent=0x7f030001;
-    public static final int colorAlphaGray=0x7f030002;
-    public static final int colorAlphaOrengi=0x7f030003;
-    public static final int colorOrengi=0x7f030004;
-    public static final int colorPrimary=0x7f030005;
-    public static final int colorPrimaryDark=0x7f030006;
-    public static final int colorSkyblue=0x7f030007;
-    public static final int colorWhite=0x7f030008;
-    public static final int gray=0x7f030009;
-    public static final int light_gray=0x7f03000a;
-    public static final int overlay_bottom_bar_background=0x7f03000b;
-    public static final int overlay_bottom_bar_separators=0x7f03000c;
-    public static final int semi_transparent_black=0x7f03000d;
-    public static final int transparent=0x7f03000e;
-    public static final int white=0x7f03000f;
+    public static final int Bule=0x7f030000;
+    public static final int White=0x7f030001;
+    public static final int black=0x7f030002;
+    public static final int colorAccent=0x7f030003;
+    public static final int colorAlphaGray=0x7f030004;
+    public static final int colorAlphaOrengi=0x7f030005;
+    public static final int colorComent=0x7f030006;
+    public static final int colorDitail=0x7f030007;
+    public static final int colorOrengi=0x7f030008;
+    public static final int colorPrimary=0x7f030009;
+    public static final int colorPrimaryDark=0x7f03000a;
+    public static final int colorSkyblue=0x7f03000b;
+    public static final int colorTabBack=0x7f03000c;
+    public static final int colorWhite=0x7f03000d;
+    public static final int gray=0x7f03000e;
+    public static final int light_gray=0x7f03000f;
+    public static final int overlay_bottom_bar_background=0x7f030010;
+    public static final int overlay_bottom_bar_separators=0x7f030011;
+    public static final int semi_transparent_black=0x7f030012;
+    public static final int transparent=0x7f030013;
+    public static final int white=0x7f030014;
   }
   public static final class dimen {
     public static final int menu_activities_list_padding_left=0x7f040000;
@@ -90,29 +95,35 @@ public final class R {
     public static final int colomn2=0x7f06000a;
     public static final int colomn3=0x7f06000b;
     public static final int colomn4=0x7f06000c;
-    public static final int icon_image=0x7f06000d;
-    public static final int leftMargin=0x7f06000e;
-    public static final int loading_indicator=0x7f06000f;
-    public static final int loading_layout=0x7f060010;
-    public static final int logo_image=0x7f060011;
-    public static final int loupe=0x7f060012;
-    public static final int loupeLayout=0x7f060013;
-    public static final int menu_group_title=0x7f060014;
-    public static final int menu_group_title_divider=0x7f060015;
-    public static final int rightMargin=0x7f060016;
-    public static final int scan_line=0x7f060017;
-    public static final int settings_menu=0x7f060018;
-    public static final int settings_menu_title=0x7f060019;
-    public static final int splash_image=0x7f06001a;
-    public static final int table_menu_top=0x7f06001b;
-    public static final int table_menu_under=0x7f06001c;
-    public static final int table_row=0x7f06001d;
-    public static final int textView=0x7f06001e;
-    public static final int text_icon_name=0x7f06001f;
-    public static final int text_title=0x7f060020;
-    public static final int topMargin=0x7f060021;
-    public static final int vu_mark=0x7f060022;
-    public static final int wordList=0x7f060023;
+    public static final int edittext_username=0x7f06000d;
+    public static final int icon_image=0x7f06000e;
+    public static final int leftMargin=0x7f06000f;
+    public static final int loading_indicator=0x7f060010;
+    public static final int loading_layout=0x7f060011;
+    public static final int logo_image=0x7f060012;
+    public static final int loupe=0x7f060013;
+    public static final int loupeLayout=0x7f060014;
+    public static final int menu_group_title=0x7f060015;
+    public static final int menu_group_title_divider=0x7f060016;
+    public static final int radiobtn_man=0x7f060017;
+    public static final int radiobtn_woman=0x7f060018;
+    public static final int radiogroup_sex=0x7f060019;
+    public static final int rightMargin=0x7f06001a;
+    public static final int scan_line=0x7f06001b;
+    public static final int settings_menu=0x7f06001c;
+    public static final int settings_menu_title=0x7f06001d;
+    public static final int splash_image=0x7f06001e;
+    public static final int submit_userInfoBtn=0x7f06001f;
+    public static final int table_menu_top=0x7f060020;
+    public static final int table_menu_under=0x7f060021;
+    public static final int table_row=0x7f060022;
+    public static final int textView=0x7f060023;
+    public static final int text_icon_name=0x7f060024;
+    public static final int text_title=0x7f060025;
+    public static final int title_userregist=0x7f060026;
+    public static final int topMargin=0x7f060027;
+    public static final int vu_mark=0x7f060028;
+    public static final int wordList=0x7f060029;
   }
   public static final class layout {
     public static final int about_screen=0x7f070000;
@@ -197,6 +208,8 @@ public final class R {
     public static final int splash_screen_description=0x7f080038;
     public static final int target_quality_error_desc=0x7f080039;
     public static final int target_quality_error_title=0x7f08003a;
+    public static final int userName=0x7f08003b;
+    public static final int user_regist=0x7f08003c;
   }
   public static final class style {
     public static final int SampleAppsTheme=0x7f090000;
