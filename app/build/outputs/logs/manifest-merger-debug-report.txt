@@ -118,7 +118,7 @@ ADDED from C:\Users\aquat\AndroidStudioProjects\kakai2017\app\src\main\AndroidMa
 	android:name
 		ADDED from C:\Users\aquat\AndroidStudioProjects\kakai2017\app\src\main\AndroidManifest.xml:115:13-65
 activity#com.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen
-ADDED from C:\Users\aquat\AndroidStudioProjects\kakai2017\app\src\main\AndroidManifest.xml:121:10-127:20
+ADDED from C:\Users\aquat\AndroidStudioProjects\kakai2017\app\src\main\AndroidManifest.xml:121:9-127:20
 	android:screenOrientation
 		ADDED from C:\Users\aquat\AndroidStudioProjects\kakai2017\app\src\main\AndroidManifest.xml:124:13-49
 	android:noHistory

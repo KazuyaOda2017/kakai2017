@@ -3,6 +3,27 @@
     android:id="@+id/camera_overlay_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    <!--コメント入力エリア-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="25dp"
+            android:text="test"
+            android:id="@+id/test_btn"/>
+        <com.vuforia.samples.VuforiaSamples.ui.CustomView.CmtInputView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cmtInputArea"
+            >
+
+        </com.vuforia.samples.VuforiaSamples.ui.CustomView.CmtInputView>
+
+    </LinearLayout>
 
         <ProgressBar
             style="@android:style/Widget.ProgressBar"
@@ -43,7 +64,7 @@
 
     </LinearLayout>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -54,5 +75,6 @@
         android:gravity="left|center_vertical"
         android:text="VuMarkを撮影してください"
         android:textSize="24sp" />
+-->
 
 </RelativeLayout>

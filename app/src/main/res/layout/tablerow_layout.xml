@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/table_row">
-
-    <TextView
-        android:background="#ffffff"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"/>
-    <TextView
-        android:background="#ffffff"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"/>
-
-</TableRow>
-
-<!--以下のTableLayoutを任意のlayoutファイルに入れる
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/TableLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1">
+    android:orientation="vertical"
+    android:background="@android:color/black">
 
-</TableLayout>
--->
+    <TextView
+        android:textSize="10sp"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:layout_marginLeft="1px"
+        android:layout_marginBottom="1px"
+        android:layout_marginRight="1px"
+        android:padding="2dp"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:singleLine="false"
+        android:layout_marginBottom="1px"
+        android:layout_marginRight="1px"
+        android:background="@color/White"
+        android:textSize="10sp"
+        android:padding="2dp"/>
+
+</TableRow>

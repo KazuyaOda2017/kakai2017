@@ -19,6 +19,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,13 +32,17 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vuforia.CameraDevice;
+import com.vuforia.CustomViewerParameters;
 import com.vuforia.DataSet;
 import com.vuforia.HINT;
 import com.vuforia.ObjectTracker;
@@ -54,10 +59,17 @@ import com.vuforia.samples.SampleApplication.utils.LoadingDialogHandler;
 import com.vuforia.samples.SampleApplication.utils.SampleApplicationGLView;
 import com.vuforia.samples.SampleApplication.utils.Texture;
 import com.vuforia.samples.VuforiaSamples.R;
+import com.vuforia.samples.VuforiaSamples.ui.Common.CommentInfo;
+import com.vuforia.samples.VuforiaSamples.ui.Common.ConvertJson;
+import com.vuforia.samples.VuforiaSamples.ui.Common.ProductInfo;
+import com.vuforia.samples.VuforiaSamples.ui.Common.UserInfo;
+import com.vuforia.samples.VuforiaSamples.ui.CustomView.CmtInputView;
+import com.vuforia.samples.VuforiaSamples.ui.CustomView.ContentsCardView;
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenu;
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuGroup;
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuInterface;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -92,18 +104,24 @@ public class VuMark extends Activity implements SampleApplicationControl,
     
     LoadingDialogHandler loadingDialogHandler = new LoadingDialogHandler(this);
 
+    //region Views
     private View _viewCard;
     private String readId;
     private TextView _textType;
     private TextView _textValue;
     private ImageView _instanceImageView;
+    private ContentsCardView _contentCard;
+    private CmtInputView _cmtInputView;
+    //endregion
 
     // Alert Dialog used to display SDK errors
     private AlertDialog mErrorDialog;
     
     boolean mIsDroidDevice = false;
-    
-    
+
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
     // Called when the activity first starts or the user navigates back to an
     // activity.
     @Override
@@ -130,14 +148,27 @@ public class VuMark extends Activity implements SampleApplicationControl,
 
         LayoutParams layoutParamsControl = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         LayoutInflater inflater = getLayoutInflater();
-        _viewCard = inflater.inflate(R.layout.card, null);
+        //_viewCard = inflater.inflate(R.layout.card, null);
+        _viewCard =inflater.inflate(R.layout.card, null);
         _viewCard.setVisibility(View.INVISIBLE);
-        LinearLayout cardLayout = (LinearLayout) _viewCard.findViewById(R.id.TableLayout1);
+        //LinearLayout cardLayout = (LinearLayout) _viewCard.findViewById(R.id.TableLayout1);
+        //LinearLayout cardLayout = (LinearLayout) _viewCard.findViewById(R.id.ContentTable);
+        _contentCard = (ContentsCardView)_viewCard.findViewById(R.id.ContentTable);
+        LinearLayout linearLayout = (LinearLayout)_contentCard.findViewById(R.id.other_review);
+        linearLayout.setVisibility(View.VISIBLE);
+        ImageButton imageButton = (ImageButton)_contentCard.findViewById(R.id.icon_comment);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //コメント画面に遷移する
 
-        cardLayout.setOnTouchListener(new View.OnTouchListener() {
+            }
+        });
+
+        _contentCard.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    hideCard();
+                   // hideCard();
                     return true;
                 }
                 return false;
@@ -322,6 +353,38 @@ public class VuMark extends Activity implements SampleApplicationControl,
         // Adds the inflated layout to the view
         addContentView(mUILayout, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
+
+        //コメント入力エリアを設定
+        _cmtInputView = (CmtInputView)mUILayout.findViewById(R.id.cmtInputArea);
+        //コメント入力を無効化
+        _cmtInputView.setEnabled(false);
+        //コールバックを設定
+        _cmtInputView.setOnCallBack(new CmtInputView.CallBackTask() {
+            @Override
+            public void CallBack(int result) {
+
+            }
+
+            @Override
+            public void SabmitCallBack(int result, CommentInfo cInfo) {
+
+            }
+        });
+
+        //テスト用ボタンを設置
+        Button testbutton = (Button)mUILayout.findViewById(R.id.test_btn);
+        testbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (_viewCard.getVisibility() == View.VISIBLE) {
+                    hideCard();
+                    return ;
+                }
+
+                showCard("","test",null);
+
+            }
+        });
         
     }
 
@@ -340,27 +403,50 @@ public class VuMark extends Activity implements SampleApplicationControl,
                 if ((_viewCard.getVisibility() == View.VISIBLE) && (readId.equals(value))) {
                     return;
                 }
+
                 readId = value;
                 Animation bottomUp = AnimationUtils.loadAnimation(context,
                         R.anim.bottom_up);
 
+                //コメント入力を有効化
+                _cmtInputView.setEnabled(true);
+
                 Resources res = getResources();
 
-                // 読み取り結果取得
-                int valueId = res.getIdentifier("read_text_" + value, "array", getPackageName());
-                List<String> valueList = Arrays.asList(res.getStringArray(valueId));
+                try {
+                   /* // 読み取り結果取得
+                    int valueId = res.getIdentifier("read_text_" + value, "array", getPackageName());
+                    List<String> valueList = Arrays.asList(res.getStringArray(valueId));
 
-                // タイトル取得
-                int titleId = res.getIdentifier("read_text_title", "array", getPackageName());
-                List<String> titleList = Arrays.asList(res.getStringArray(titleId));
+                    // タイトル取得
+                    int titleId = res.getIdentifier("read_text_title", "array", getPackageName());
+                    List<String> titleList = Arrays.asList(res.getStringArray(titleId));
 
-                // テーブル設定
-                setTableRow(titleList, valueList);
+                    // テーブル設定
+                    setTableRow(titleList, valueList);*/
+                    //テスト用　商品データの受け取り
+                    //Json →　デシリアライズ
+                    ProductInfo productInfo = new ProductInfo();
+                    String jsonStr = "{\"description\":\"MAHOT COFFEEの想いが詰まったブレンド\",\"delInfo\":\"しっかりとしたビターなコクがあり、赤ワインのような上品なボディー。アクセントに完熟したチェリーのような風味がアフターテイストで楽しめます。,●●●●○,●●○○○,●●○○○,700円\\/100ｇ　1300円\\/200ｇ,370円,370円\",\"contentsName\":\"MAHOT ブレンド　SONE\"}";
 
-                _viewCard.bringToFront();
-                _viewCard.setVisibility(View.VISIBLE);
-                _viewCard.startAnimation(bottomUp);
-                // mUILayout.invalidate();
+                    productInfo = ConvertJson.DeserializeJsonToProductInfo(jsonStr);
+                    //項目名を取得
+                    productInfo.indexInfo = "商品名,キャッチコピー,詳細,コク,甘味,酸味,販売価格,ドリップコーヒー価格,カフェオレ価格";
+
+                    UserInfo.getInstance().ConvertProductInfo(productInfo);
+
+                    //商品情報でカードを作成
+                    _contentCard.setContentsInfo(UserInfo.getInstance().getProductInfoMap(),context);
+
+
+                    _viewCard.bringToFront();
+                    _viewCard.setVisibility(View.VISIBLE);
+                    _viewCard.startAnimation(bottomUp);
+                    // mUILayout.invalidate();
+                }catch (Exception e){
+
+                }
+
             }
         });
     }
@@ -371,21 +457,23 @@ public class VuMark extends Activity implements SampleApplicationControl,
      * @param valueList　読み取り結果理リスト
      */
     public void setTableRow(List<String> titleList, List<String> valueList){
-        ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
+        /*ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
         for (int i = 0 ; i < valueList.size() ; i++) {
             getLayoutInflater().inflate(R.layout.tablerow_layout, vg);
             TableRow tr = (TableRow) vg.getChildAt(i);
             ((TextView) (tr.getChildAt(0))).setText(titleList.get(i));
             ((TextView) (tr.getChildAt(1))).setText(valueList.get(i));
-        }
+        }*/
     }
 
     /**
      * TableLayoutを初期化
      */
     public void clearTableRow() {
-        ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
-        vg.removeAllViews();
+
+        _contentCard.clearTable();
+       /* ViewGroup vg = (ViewGroup)findViewById(R.id.TableLayout1);
+        vg.removeAllViews();*/
     }
 
     void hideCard() {
@@ -397,6 +485,9 @@ public class VuMark extends Activity implements SampleApplicationControl,
             if (_viewCard.getVisibility() != View.VISIBLE) {
                 return;
             }
+
+            //コメント入力を無効化
+                _cmtInputView.setEnabled(false);
 
             //_textType.setText("");
             //_textValue.setText("");

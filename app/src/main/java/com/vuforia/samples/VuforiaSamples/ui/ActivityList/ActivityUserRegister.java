@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vuforia.samples.VuforiaSamples.R;
 import com.vuforia.samples.VuforiaSamples.app.VuMark.VuMark;
+import com.vuforia.samples.VuforiaSamples.ui.Common.ConvertJson;
 import com.vuforia.samples.VuforiaSamples.ui.Common.HttpRequest;
 import com.vuforia.samples.VuforiaSamples.ui.Common.JsonUserInfo;
 import com.vuforia.samples.VuforiaSamples.ui.Common.PrefarenceRequest;
@@ -131,12 +132,7 @@ public class ActivityUserRegister extends Activity{
             j_user.userName = userInfo.getUserName();
             j_user.sex = userInfo.getSex();
 
-            String json = null;
-            try {
-                json = objectMapper.writeValueAsString(j_user);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            String json = ConvertJson.SerializeJson(j_user);
 
             //String url = "http://192.168.0.150:8080/kakai2017-restapi/insert/user";
             //http_res = HttpRequest.excutePost(url,json);

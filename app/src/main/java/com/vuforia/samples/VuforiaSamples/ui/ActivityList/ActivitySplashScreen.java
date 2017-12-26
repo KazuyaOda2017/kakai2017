@@ -13,11 +13,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.vuforia.samples.VuforiaSamples.R;
 import com.vuforia.samples.VuforiaSamples.app.VuMark.VuMark;
@@ -68,8 +70,8 @@ public class ActivitySplashScreen extends Activity
                     intent = new Intent(ActivitySplashScreen.this,ActivityUserRegister.class);
                 }else {
                     //カメラ画面に遷移する
-                    intent = new Intent(ActivitySplashScreen.this,
-                            VuMark.class);
+                    intent = new Intent(ActivitySplashScreen.this, VuMark.class);
+                            //VuMark.class);
                 }
 
 

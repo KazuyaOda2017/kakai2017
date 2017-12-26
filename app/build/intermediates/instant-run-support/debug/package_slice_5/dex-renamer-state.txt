@@ -1,4 +1,4 @@
-#Tue Dec 19 22:01:30 JST 2017
-base.0=C\:\\Users\\aquat\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
+#Tue Dec 26 22:12:06 JST 2017
+base.0=C\:\\Users\\aquat\\AndroidStudioProjects\\kakai2017\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\43
 path.0=classes.dex
 renamed.0=classes.dex

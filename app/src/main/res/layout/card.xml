@@ -6,16 +6,19 @@
     android:gravity="top"
     android:orientation="vertical">
 
+<com.vuforia.samples.VuforiaSamples.ui.CustomView.ContentsCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ContentTable"></com.vuforia.samples.VuforiaSamples.ui.CustomView.ContentsCardView>
 
+        <!--<TableLayout-->
+            <!--android:id="@+id/TableLayout1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:stretchColumns="1"-->
+            <!--android:background="#000000">-->
 
-        <TableLayout
-            android:id="@+id/TableLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:background="#000000">
-
-        </TableLayout>
+        <!--</TableLayout>-->
 
 
 </RelativeLayout>
