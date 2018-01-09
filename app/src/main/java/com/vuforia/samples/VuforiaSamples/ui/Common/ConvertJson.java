@@ -46,5 +46,23 @@ public class  ConvertJson {
 
     }
 
+    /**
+     * jsonをコメントデータオブジェクトにデシリアライズ
+     * @param json
+     * @return
+     */
+    public static CmtDataList DeserializeJsonToCmtDataList(String json){
+
+        CmtDataList cmtDataList = new CmtDataList();
+        try{
+            cmtDataList = objectMapper.readValue(json, CmtDataList.class);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return cmtDataList;
+
+    }
+
 
 }

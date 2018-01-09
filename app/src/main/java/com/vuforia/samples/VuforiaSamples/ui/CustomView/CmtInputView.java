@@ -141,6 +141,19 @@ public class CmtInputView extends LinearLayout{
     }
 
     /**
+     * 評価ボタンの設定
+     * @param num
+     */
+    public void setStar(int num){
+
+        try{
+            evaluationView.changeStarState(num);
+        }catch (Exception e){
+
+        }
+    }
+
+    /**
      * 有効/無効の設定
      * @param value
      */

@@ -107,6 +107,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityTabMain"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:noHistory="true"

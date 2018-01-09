@@ -70,6 +70,7 @@ public class ActivitySplashScreen extends Activity
                     intent = new Intent(ActivitySplashScreen.this,ActivityUserRegister.class);
                 }else {
                     //カメラ画面に遷移する
+                    String id = UserInfo.getInstance().getUserId();
                     intent = new Intent(ActivitySplashScreen.this, VuMark.class);
                             //VuMark.class);
                 }

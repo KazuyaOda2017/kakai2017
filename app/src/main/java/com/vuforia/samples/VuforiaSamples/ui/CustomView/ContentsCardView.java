@@ -26,6 +26,9 @@ public class ContentsCardView extends LinearLayout {
     private TableLayout tableLayout;
     private ImageButton imageButton;
     private ViewGroup vg;
+
+    private Context _context;
+
     //endregion
 
     /**
@@ -36,6 +39,8 @@ public class ContentsCardView extends LinearLayout {
     public ContentsCardView(Context context,  AttributeSet attrs) {
         super(context, attrs);
 
+        _context = context;
+
         //レイアウトを取得する
         View layout = LayoutInflater.from(context).inflate(R.layout.contents_card,this);
 
@@ -44,6 +49,8 @@ public class ContentsCardView extends LinearLayout {
 
         //ImageButtonを取得
         imageButton = (ImageButton)layout.findViewById(R.id.icon_comment);
+
+
 
     }
 
@@ -59,7 +66,7 @@ public class ContentsCardView extends LinearLayout {
      * 商品情報をテーブルにセットする
      * @param productInfo
      */
-    public void setContentsInfo(HashMap<String,String> productInfo, Context context){
+    public void setContentsInfo(HashMap<String,String> productInfo){
         try {
             //TableLayoutをViewGropに設定
              vg = (ViewGroup)tableLayout;
@@ -67,7 +74,7 @@ public class ContentsCardView extends LinearLayout {
             //商品名　キャッチコピー　販売価格　ドリップコーヒー価格を表示する
             int row = 0;
             for(String index: ProductInfo.cardIndexNames) {
-                LayoutInflater.from(context).inflate(R.layout.tablerow_layout, vg);
+                LayoutInflater.from(_context).inflate(R.layout.tablerow_layout, vg);
                 TableRow tr = (TableRow) vg.getChildAt(row);
 
                 TextView indexView = (TextView) tr.getChildAt(0);
@@ -110,4 +117,6 @@ public class ContentsCardView extends LinearLayout {
 
         }
     }
+
+
 }

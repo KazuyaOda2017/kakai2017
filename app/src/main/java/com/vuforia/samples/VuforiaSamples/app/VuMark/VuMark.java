@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -59,6 +60,9 @@ import com.vuforia.samples.SampleApplication.utils.LoadingDialogHandler;
 import com.vuforia.samples.SampleApplication.utils.SampleApplicationGLView;
 import com.vuforia.samples.SampleApplication.utils.Texture;
 import com.vuforia.samples.VuforiaSamples.R;
+import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivitySplashScreen;
+import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityTabMain;
+import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityUserRegister;
 import com.vuforia.samples.VuforiaSamples.ui.Common.CommentInfo;
 import com.vuforia.samples.VuforiaSamples.ui.Common.ConvertJson;
 import com.vuforia.samples.VuforiaSamples.ui.Common.ProductInfo;
@@ -161,6 +165,11 @@ public class VuMark extends Activity implements SampleApplicationControl,
             @Override
             public void onClick(View view) {
                 //コメント画面に遷移する
+                //Intent
+                Intent intent = null;
+
+                intent = new Intent(VuMark.this, ActivityTabMain.class);
+                startActivity(intent);
 
             }
         });
@@ -436,7 +445,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
                     UserInfo.getInstance().ConvertProductInfo(productInfo);
 
                     //商品情報でカードを作成
-                    _contentCard.setContentsInfo(UserInfo.getInstance().getProductInfoMap(),context);
+                    _contentCard.setContentsInfo(UserInfo.getInstance().getProductInfoMap());
 
 
                     _viewCard.bringToFront();

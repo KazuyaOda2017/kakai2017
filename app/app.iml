@@ -118,8 +118,11 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.3.4@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-annotations:22.2.1@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:support-v4-22.2.1" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-annotations:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-core:2.3.4@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:appcompat-v7-22.2.1" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\aquat\AndroidStudioProjects\kakai2017\app\Vuforia.jar:unspecified@jar" level="project" />
   </component>
 </module>
