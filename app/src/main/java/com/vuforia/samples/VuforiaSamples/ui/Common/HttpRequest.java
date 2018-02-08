@@ -116,27 +116,30 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Integer, String> impleme
     protected String doInBackground(Uri.Builder... builders) {
 
 
-        Thread thread = new Thread();
+      /*  Thread thread = new Thread();
         try {
             thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //String res = this.excutePost(this.url,this.json);
-        return null;
+        return "";
     }
 
     @Override
     protected void onPreExecute(){
 
         try {
-            //ダイアログを表示する
-            progressDialog = new ProgressDialog(this.activity);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("接続中");
-            progressDialog.setCancelable(true);
-            progressDialog.show();
+            if(activity != null){
+                //ダイアログを表示する
+                progressDialog = new ProgressDialog(this.activity);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("接続中");
+                progressDialog.setCancelable(true);
+                progressDialog.show();
+
+            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -149,7 +152,9 @@ public class HttpRequest extends AsyncTask<Uri.Builder, Integer, String> impleme
         super.onPostExecute(result);
         //プログレスダイアログを閉じる
         try{
-            progressDialog.dismiss();
+            if(progressDialog != null){
+                progressDialog.dismiss();
+            }
             callBackTask.CallBack(result);
         }catch (Exception e){
 

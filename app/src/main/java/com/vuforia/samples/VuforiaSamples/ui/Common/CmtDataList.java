@@ -9,9 +9,13 @@ import java.util.List;
 
 public class CmtDataList {
 
-    public int totalNumber;
+    public int cmtCount;
 
     public int offset;
+
+    public String userId;
+
+    public int markerId;
 
     public List<CommentInfo> dispList;
 

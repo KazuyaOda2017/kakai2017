@@ -1,7 +1,9 @@
 package com.vuforia.samples.VuforiaSamples.ui.Common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by K.Oda on 2017/12/16.
@@ -31,12 +33,16 @@ public class UserInfo implements Serializable {
     public void addProductInfo(String key,String value){
         this.productInfoMap.put(key,value);
     }
+
+    private List<DitailInfo> ditailInfos;
+    public List<DitailInfo> getDitailInfos(){return ditailInfos;}
     //endregion
 
 
     //region コンストラクタ
     private UserInfo(){
         this.productInfoMap = new HashMap<String,String>();
+        this.ditailInfos = new ArrayList<DitailInfo>();
     }
 
     public static synchronized UserInfo getInstance(){
@@ -54,11 +60,25 @@ public class UserInfo implements Serializable {
 
             String[] indexlist = productInfo.indexInfo.split(",",0);
 
+            int index = 0;
             //商品名
             addProductInfo(indexlist[0],productInfo.contentsName);
 
+            DitailInfo ditailInfo = new DitailInfo(indexlist[0],productInfo.contentsName,index,true);
+            index++;
+            this.ditailInfos.add(ditailInfo);
+
+            //写真
+            addProductInfo(ProductInfo.IMAGE,productInfo.image);
+            ditailInfo = new DitailInfo(ProductInfo.IMAGE,productInfo.image,index,true);
+            this.ditailInfos.add(ditailInfo);
+            index++;
+
             //キャッチコピー
             addProductInfo(indexlist[1],productInfo.description);
+            ditailInfo = new DitailInfo(indexlist[1],productInfo.description,index,true);
+            this.ditailInfos.add(ditailInfo);
+            index++;
 
             //リストの３列目からは詳細データ
             //詳細
@@ -66,8 +86,16 @@ public class UserInfo implements Serializable {
             //項目分ループする
             for(int i = 2,j = 0; i < indexlist.length;i++,j++){
                 addProductInfo(indexlist[i],values[j]);
+                ditailInfo = new DitailInfo(indexlist[i],values[j],index,true);
+                this.ditailInfos.add(ditailInfo);
+                index++;
             }
 
+            //マーカーID
+            addProductInfo(ProductInfo.MARKERID, String.valueOf(productInfo.markerId));
+            ditailInfo = new DitailInfo(ProductInfo.MARKERID, String.valueOf(productInfo.markerId),index,false);
+            this.ditailInfos.add(ditailInfo);
+            index++;
 
             return true;
         }catch (Exception e){

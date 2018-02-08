@@ -79,7 +79,7 @@ public class ActivityUserRegister extends Activity{
 
                 try {
                     RadioButton rb = (RadioButton)findViewById(i);
-                    int sex = (int)rb.getTag();
+                    int sex = Integer.parseInt(String.valueOf(rb.getTag()));
 
                     //ユーザー情報更新
                     userInfo.setSex(sex);
@@ -138,9 +138,7 @@ public class ActivityUserRegister extends Activity{
             //http_res = HttpRequest.excutePost(url,json);
             Uri.Builder builder = new Uri.Builder();
             httpRequest = new HttpRequest(HttpRequest.INSERT_USERINFO, json,this);
-
             httpRequest.execute(builder);
-
             httpRequest.setOnCallBack(new HttpRequest.CallBackTask() {
 
                 @Override

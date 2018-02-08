@@ -1,6 +1,7 @@
 package com.vuforia.samples.VuforiaSamples.ui.Fragment;
 
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 
@@ -21,6 +22,7 @@ import com.vuforia.samples.VuforiaSamples.ui.Adapter.CommentListAdapter;
 import com.vuforia.samples.VuforiaSamples.ui.Common.CmtDataList;
 import com.vuforia.samples.VuforiaSamples.ui.Common.CommentInfo;
 import com.vuforia.samples.VuforiaSamples.ui.Common.ConvertJson;
+import com.vuforia.samples.VuforiaSamples.ui.Common.HttpRequest;
 import com.vuforia.samples.VuforiaSamples.ui.Common.ProductInfo;
 import com.vuforia.samples.VuforiaSamples.ui.Common.UserInfo;
 import com.vuforia.samples.VuforiaSamples.ui.CustomView.CmtInputView;
@@ -54,6 +56,7 @@ public class CommentFragment extends Fragment{
 
     //コメントデータ
     public CmtDataList _commentData;
+    private int _offset;
 
 
     private static ObjectMapper objectMapper = new ObjectMapper();
@@ -73,10 +76,6 @@ public class CommentFragment extends Fragment{
         //アダプターの作成
         adapter = new CommentListAdapter(this.getActivity().getApplicationContext());
 
-        //コメントデータの取得
-        getCommentData();
-        //取得コメントを表示する
-        setCmtDataTimeLine(_commentData);
 
         //region 商品情報カード作成
         ContentsCardView contentsCardView = (ContentsCardView)layout.findViewById(R.id.productCard) ;
@@ -136,6 +135,17 @@ public class CommentFragment extends Fragment{
         });
 
 
+        //コメントデータの取得
+        //コメントデータ初期設定
+        _commentData = new CmtDataList();
+        _commentData.offset = 0;
+        _commentData.userId = UserInfo.getInstance().getUserId();
+        _commentData.markerId = Integer.parseInt(UserInfo.getInstance().getProductInfoMap().get(ProductInfo.MARKERID));
+
+        getCommentData();
+        //取得コメントを表示する
+        //setCmtDataTimeLine(_commentData);
+
         layout.requestFocus();
 
         return layout;
@@ -146,11 +156,30 @@ public class CommentFragment extends Fragment{
     private boolean getCommentData(){
 
         try{
-
             //コメントデータを取得してフィールドに投げる
-            String commentjsonStr = "{\"dispList\":[{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":1,\"userName\":\"小田\"},{\"insertDate\":\"2017.12.1\",\"sex\":0,\"star\":3,\"userCmt\":\"苦かった\",\"userId\":2,\"userName\":\"田中\"},{\"insertDate\":\"2017.12.5\",\"sex\":0,\"star\":2,\"userCmt\":\"いまいち\",\"userId\":3,\"userName\":\"中橋\"},{\"insertDate\":\"2017.12.4\",\"sex\":0,\"star\":4,\"userCmt\":\"また来ます\",\"userId\":4,\"userName\":\"中野\"},{\"insertDate\":\"2017.12.5\",\"sex\":1,\"star\":1,\"userCmt\":\"まぁまぁ\",\"userId\":5,\"userName\":\"溝辺\"}],\"offset\":0,\"totalNumber\":5}";
-           //Json文字列をデシリアライズ
-            _commentData = ConvertJson.DeserializeJsonToCmtDataList(commentjsonStr);
+            String requestStr = ConvertJson.SerializeJson(_commentData);
+
+            HttpRequest httpRequest = new HttpRequest("",requestStr,null);
+            httpRequest.execute(new Uri.Builder());
+            httpRequest.setOnCallBack(new HttpRequest.CallBackTask() {
+                @Override
+                public void CallBack(String result) {
+
+                    result = "{\"dispList\":[{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":\"1\",\"userName\":\"小田\"}," +
+                            "{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":\"1\",\"userName\":\"小田\"}," +
+                            "{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":\"1\",\"userName\":\"小田\"}," +
+                            "{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":\"1\",\"userName\":\"小田\"}," +
+                            "{\"insertDate\":\"2017.11.25\",\"sex\":0,\"star\":5,\"userCmt\":\"美味しかった\",\"userId\":\"1\",\"userName\":\"小田\"}]," +
+                            "\"offset\":0," +
+                            "\"cmtCount\":5," +
+                            "\"userId\":\"1\"," +
+                            "\"markerId\":1}";
+                    //Json文字列をデシリアライズ
+                    _commentData = ConvertJson.DeserializeJsonToCmtDataList(result);
+                    setCmtDataTimeLine(_commentData);
+
+                }
+            });
 
             return true;
         }catch (Exception e){
